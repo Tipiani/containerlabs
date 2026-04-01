@@ -1,0 +1,33 @@
+{
+  "freeTextAnnotations": [],
+  "freeShapeAnnotations": [],
+  "trafficRateAnnotations": [],
+  "groupStyleAnnotations": [],
+  "networkNodeAnnotations": [],
+  "nodeAnnotations": [
+    {
+      "id": "router1",
+      "position": {
+        "x": 380,
+        "y": 400
+      }
+    },
+    {
+      "id": "router2",
+      "position": {
+        "x": 440,
+        "y": 260
+      }
+    },
+    {
+      "id": "router3",
+      "position": {
+        "x": 540,
+        "y": 400
+      }
+    }
+  ],
+  "edgeAnnotations": [],
+  "aliasEndpointAnnotations": [],
+  "viewerSettings": {}
+}

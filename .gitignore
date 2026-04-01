@@ -1,0 +1,10 @@
+# Containerlab
+.clab/
+clab-*/
+
+# Logs / temporales
+*.log
+*.tmp
+
+# Opcional
+*.bak
