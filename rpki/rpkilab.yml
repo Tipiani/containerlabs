@@ -11,16 +11,19 @@ topology:
       image: frrouting/frr:v7.5.1
       binds:
         - router1/daemons:/etc/frr/daemons
+        - router1:/etc/frr
     router2:
       kind: linux
       image: frrouting/frr:v7.5.1
       binds:
         - router2/daemons:/etc/frr/daemons
+        - router2:/etc/frr
     router3:
       kind: linux
       image: frrouting/frr:v7.5.1
       binds:
         - router3/daemons:/etc/frr/daemons
+        - router3:/etc/frr
 
   links:
     - endpoints: ["router1:eth1", "router2:eth1"]
