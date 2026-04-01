@@ -6,5 +6,11 @@ clab-*/
 *.log
 *.tmp
 
+# Comprimidos
+*.tar
+*.tar.xz
+*.qcow2
+*.img
+
 # Opcional
 *.bak
