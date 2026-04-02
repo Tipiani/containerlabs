@@ -8,28 +8,28 @@ topology:
   nodes:
     router1:
       kind: linux
-      #image: frrouting/frr:v8.4.0
+      image: frrouting/frr:v8.4.0
       #image: quay.io/frrouting/frr:8.4.1
       #image: rpki/rpki-client:latest
-      image: arbiza/frr:latest
+      #image: arbiza/frr:latest
       binds:
         - router1/daemons:/etc/frr/daemons
         - router1/frr.conf:/etc/frr/frr.conf
     router2:
       kind: linux
-      #image: frrouting/frr:v8.4.0
+      image: frrouting/frr:v8.4.0
       #image: quay.io/frrouting/frr:8.4.1
       #image: rpki/rpki-client:latest
-      image: arbiza/frr:latest
+      #image: arbiza/frr:latest
       binds:
         - router2/daemons:/etc/frr/daemons
         - router2/frr.conf:/etc/frr/frr.conf
     router3:
       kind: linux
-      #image: frrouting/frr:v8.4.0
+      image: frrouting/frr:v8.4.0
       #image: quay.io/frrouting/frr:8.4.1
       #image: rpki/rpki-client:latest
-      image: arbiza/frr:latest
+      #image: arbiza/frr:latest
       binds:
         - router3/daemons:/etc/frr/daemons
         - router3/frr.conf:/etc/frr/frr.conf
