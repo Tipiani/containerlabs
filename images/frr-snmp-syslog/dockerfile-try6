@@ -68,9 +68,16 @@ WORKDIR /frr
 RUN ./bootstrap.sh
 RUN ./configure \
     --prefix=/usr \
-    --localstatedir=/var/run/frr \
-    --sbindir=/usr/lib/frr \
+    --includedir=\${prefix}/include \
+    --bindir=\${prefix}/bin \
+    --sbindir=\${prefix}/lib/frr \
+    --libdir=\${prefix}/lib/frr \
+    --libexecdir=\${prefix}/lib/frr \
     --sysconfdir=/etc/frr \
+    --localstatedir=/var \
+    --with-moduledir=\${prefix}/lib/frr/modules \
+    --enable-configfile-mask=0640 \
+    --enable-logfile-mask=0640 \
     --enable-snmp \
     --enable-multipath=64 \
     --enable-user=frr \
@@ -85,11 +92,7 @@ RUN ./configure \
     --disable-isisd \
     --disable-ripd \
     --disable-ldpd \
-    --disable-ripngd \
-    --disable-ospf6d \
-    --disable-eigrpd \
-    --disable-vrrpd \
-    --disable-fabricd
+    --disable-ripngd
 
 #   --with-pkg-extra-version=-MyOwnFRRVersion \    
 
@@ -120,7 +123,7 @@ RUN install -m 640 -o frr -g frr tools/etc/frr/support_bundle_commands.conf /etc
 COPY daemons /etc/frr/daemons
 COPY services /etc/services
 
-RUN chown -R frr:frr /etc/frr/daemons
+RUN chown -R frr:frr /etc/frr/
 RUN chown -R frr:frr /etc/services
 
 RUN chown -R frr:syslog /var/log/frr

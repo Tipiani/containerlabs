@@ -24,7 +24,7 @@
   docker run -it frr:isp bash
 
 - Docker: conectarse a contenedor corriendo
-  docker exec -it <contenerdor> bash #nombre de contenedor en 'docker ps'
+  docker exec -it clab-frr-rpkilab-router1 bash #nombre de contenedor en 'docker ps'
 
 - Docker: ver logs de contenedor
   docker logs clab-frr-rpkilab-router1

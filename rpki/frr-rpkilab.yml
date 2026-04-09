@@ -15,19 +15,19 @@ topology:
       #image: frr:enhanced
       image: frr:isp
       binds:
-        - router1/daemons:/etc/frr/daemons
+        #- router1/daemons:/etc/frr/daemons
         - router1/frr.conf:/etc/frr/frr.conf
     router2:
       kind: linux
       image: frr:isp
       binds:
-        - router2/daemons:/etc/frr/daemons
+        #- router2/daemons:/etc/frr/daemons
         - router2/frr.conf:/etc/frr/frr.conf
     router3:
       kind: linux
       image: frr:isp
       binds:
-        - router3/daemons:/etc/frr/daemons
+        #- router3/daemons:/etc/frr/daemons
         - router3/frr.conf:/etc/frr/frr.conf
   links:
     - endpoints: ["router1:eth1", "router2:eth1"]
