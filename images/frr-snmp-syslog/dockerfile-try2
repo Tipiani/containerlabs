@@ -1,0 +1,21 @@
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt update && apt install -y \
+    frr \
+    frr-pythontools \
+    rsyslog \
+    snmp \
+    snmpd
+
+# SNMP config
+RUN echo "rocommunity public" > /etc/snmp/snmpd.conf && \
+    echo "agentAddress udp:161" >> /etc/snmp/snmpd.conf
+
+# Syslog remoto
+RUN echo "*.* @192.168.100.10:514" >> /etc/rsyslog.conf
+
+CMD service rsyslog start && \
+    service snmpd start && \
+    /usr/lib/frr/frrinit.sh start

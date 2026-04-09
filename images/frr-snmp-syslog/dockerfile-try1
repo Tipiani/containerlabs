@@ -1,0 +1,21 @@
+FROM frrouting/frr:v8.4.0
+
+USER root
+
+# Instalar syslog y SNMP
+RUN apt update && apt install -y \
+    rsyslog \
+    snmp \
+    snmpd
+
+# Configuración básica SNMP
+RUN echo "rocommunity public" > /etc/snmp/snmpd.conf && \
+    echo "agentAddress udp:161" >> /etc/snmp/snmpd.conf
+
+# Configuración básica syslog remoto
+RUN echo "*.* @192.168.100.10:514" >> /etc/rsyslog.conf
+
+# Script de inicio
+CMD service rsyslog start && \
+    service snmpd start && \
+    /usr/lib/frr/frrinit.sh start

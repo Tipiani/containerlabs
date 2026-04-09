@@ -1,0 +1,68 @@
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# 🔹 Instalar dependencias base + herramientas útiles
+RUN apt update && apt install -y \
+    git \
+    build-essential \
+    libreadline-dev \
+    pkg-config \
+    libssl-dev \
+    libjson-c-dev \
+    bison \
+    flex \
+    python3-dev \
+    libsystemd-dev \
+    libpcre2-dev \
+    cmake \
+    curl \
+    ca-certificates \
+    rsyslog \
+    snmp \
+    snmpd \
+    iproute2 \
+    iputils-ping \
+    net-tools \
+    tcpdump \
+    nano
+
+# 🔹 Clonar FRR (elige versión estable si quieres)
+RUN git clone https://github.com/FRRouting/frr.git /frr
+
+WORKDIR /frr
+
+# 🔹 Compilar FRR con TODO lo que necesitas
+RUN ./bootstrap.sh && \
+    ./configure \
+      --enable-rpki \
+      --enable-snmp \
+      --enable-multipath=64 \
+      --enable-user=frr \
+      --enable-group=frr \
+      --enable-vtysh \
+    && make -j$(nproc) \
+    && make install
+
+# 🔹 Crear usuario FRR
+RUN groupadd -r frr && useradd -r -g frr frr
+
+# 🔹 Crear directorios necesarios
+RUN mkdir -p /etc/frr /var/log/frr && \
+    chown -R frr:frr /etc/frr /var/log/frr
+
+# 🔹 Config básica FRR
+RUN echo -e "zebra=yes\nbgpd=yes\n" > /etc/frr/daemons
+
+# 🔹 Config SNMP básica
+RUN echo "rocommunity public" > /etc/snmp/snmpd.conf && \
+    echo "agentAddress udp:161" >> /etc/snmp/snmpd.conf
+
+# 🔹 Config syslog remoto (EDITA ESTA IP)
+RUN echo "*.* @192.168.100.10:514" >> /etc/rsyslog.conf
+
+# 🔹 Script de arranque
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+CMD ["/start.sh"]
