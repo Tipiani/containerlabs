@@ -6,7 +6,7 @@ mgmt:
 
 topology:
   nodes:
-    router1:
+    lab-router1:
       kind: linux
       #image: frrouting/frr:v8.4.0
       #image: quay.io/frrouting/frr:8.4.1
@@ -16,19 +16,19 @@ topology:
       image: frr:isp
       binds:
         #- router1/daemons:/etc/frr/daemons
-        - router1/frr.conf:/etc/frr/frr.conf
-    router2:
+        - lab-router1/frr.conf:/etc/frr/frr.conf
+    lab-router2:
       kind: linux
       image: frr:isp
       binds:
         #- router2/daemons:/etc/frr/daemons
-        - router2/frr.conf:/etc/frr/frr.conf
-    router3:
+        - lab-router2/frr.conf:/etc/frr/frr.conf
+    lab-router3:
       kind: linux
       image: frr:isp
       binds:
         #- router3/daemons:/etc/frr/daemons
-        - router3/frr.conf:/etc/frr/frr.conf
+        - lab-router3/frr.conf:/etc/frr/frr.conf
   links:
-    - endpoints: ["router1:eth1", "router2:eth1"]
-    - endpoints: ["router2:eth2", "router3:eth2"]
+    - endpoints: ["lab-router1:eth1", "lab-router2:eth1"]
+    - endpoints: ["lab-router2:eth2", "lab-router3:eth2"]

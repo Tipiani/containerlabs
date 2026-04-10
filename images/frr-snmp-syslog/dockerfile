@@ -130,7 +130,7 @@ RUN echo "rocommunity public" > /etc/snmp/snmpd.conf && \
     echo "agentAddress udp:161" >> /etc/snmp/snmpd.conf
 
 # ?? Config syslog remoto (EDITA ESTA IP)
-RUN echo "*.* @10.23.3.250" >> /etc/rsyslog.conf
+RUN echo "*.* @10.23.3.250:514" >> /etc/rsyslog.conf
 
 # ?? Script de arranque
 COPY start.sh /start.sh
