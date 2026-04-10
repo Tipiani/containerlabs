@@ -1,0 +1,14 @@
+name: frr-rpkilab
+
+topology:
+  nodes:
+    srl1:
+      kind: nokia_srlinux
+      type: ixrd1
+      image: ghcr.io/nokia/srlinux:latest
+    client1:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool:latest
+
+  links:
+    - endpoints: [ "srl1:e1-1", "client1:eth1" ]
